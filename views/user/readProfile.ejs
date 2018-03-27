@@ -1,0 +1,19 @@
+<%- include ../partials/header.ejs %>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <td><%= info.user.username %></td>
+  </tr>
+  <tr>
+    <th>Password</th>
+    <td><%= info.user.password %></td>
+  </tr>
+  <tr>
+    <th>Name Alias</th>
+    <td><%= info.user.name %></td>
+  </tr>
+  <td><a href="/user/<%=info.user.id%>/editProfile">Edit</a></td>
+</table>
+
+<%- include ../partials/footer.ejs %>

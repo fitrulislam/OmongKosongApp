@@ -1,29 +1,21 @@
 <%- include ../partials/header.ejs %>
-
-  <% if(info.status) { %>
-    <a href="/user/profile">Profile</a>
-    <a href="/user/logout">Logout</a>
-  <% } else { %>
-    <a href="/user/register">Register</a>
-    <a href="/user/login">Login</a>
-  <% } %>
-
-  <p><%= info.name %></p>
-
-
   <table>
     <thead>
       <th>Forum Name</th>
       <th>Contributor</th>
+      <th>Action</th>
     </thead>
     <tbody>
       <% for(let i=0; i<forums.length; i++){ %>
         <tr>
           <td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
           <td><%= forums[i].contributor %></td>
+          <td>
+            <a href="/forum/<%= forums[i].id %>/edit">Edit</a>
+            <a href="/forum/<%= forums[i].id %>/delete">Delete</a>
+          </td>
         </tr>
       <% } %>
     </tbody>
   </table>
-
 <%- include ../partials/footer.ejs %>

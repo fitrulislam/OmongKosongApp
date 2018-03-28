@@ -1,15 +1,36 @@
-<%- include ../partials/header.ejs %>
-<%= err %>
-<br>
-<br>
-<form method="POST">
-  <label>username</label><br>
-  <input type="text" name="username" placeholder="insert your username"><br>
-  <br>
-  <label>password</label><br>
-  <input type="text" name="password" placeholder="insert your password"><br>
-  <input type="submit" value="submit">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/header %>
 
-
-<%- include ../partials/footer.ejs %>
+	<div class="container">
+    <% if(err) { %>
+    <div class="alert alert-danger">
+      <strong>Error!</strong> <%= err %>
+    </div>
+		<% } %>
+		
+		
+		<h3>Login</h3>
+		<form class="form-horizontal" method="post">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Username</label>
+	      		<div class="col-sm-5">
+	        		<input class="form-control" id="username" name="username" type="text" placeholder="Input Username">
+	      		</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Password</label>
+	      		<div class="col-sm-5">
+	        		<input class="form-control" id="password" name="password" type="password" placeholder="Input Password">
+	      		</div>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Login" style="margin-left: 200px" />
+		</form>
+  </div>
+  <%- include ../partials/footer.ejs %>
+</body>
+</html>

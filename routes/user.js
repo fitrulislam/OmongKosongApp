@@ -2,15 +2,15 @@ const routes = require('express').Router()
 const models = require('../models')
 const forAuth = require('../middleware/forAuth.js')
 
-routes.get('/register', (req, res) => {
+routes.get('/signup', (req, res) => {
   let obj = {
     info: req.session,
     err: req.query.err
   }
-  res.render('./user/register',obj)
+  res.render('./user/signup',obj)
 })
 
-routes.post('/register', (req, res) => {
+routes.post('/signup', (req, res) => {
   let obj = {
     username: req.body.username,
     password: req.body.password
@@ -29,7 +29,7 @@ routes.post('/register', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.redirect(`/user/register?err=${err.message}`)
+      res.redirect(`/user/signup?err=${err.message}`)
     })
 })
 

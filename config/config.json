@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "fitrul31",
-    "password": "fitrul31",
+    "username": "postgres",
+    "password": null,
     "database": "OmongKosongApp",
     "host": "127.0.0.1",
     "dialect": "postgres"

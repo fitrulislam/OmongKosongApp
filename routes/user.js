@@ -43,7 +43,10 @@ routes.get('/profile', (req, res) => {
 routes.get('/:id/editProfile', (req, res) => {
   models.User.findById(req.params.id)
   .then(data => {
-    let obj = {user: data}
+    let obj = {
+      user: data,
+      info: req.session
+    }
     res.render('user/editProfile', obj)
   })
   .catch(err => {
@@ -87,7 +90,8 @@ routes.get('/logout', (req, res) => {
 
 routes.get('/login', (req, res) => {
   let obj = {
-    info: req.session
+    info: req.session,
+    err: ''
   }
   res.render('./user/login',obj)
 })
@@ -98,27 +102,42 @@ routes.post('/login', (req, res) => {
       username: req.body.username
     }
   })
-  .then(info => {
-    models.User.findOne({
-      where: {
-        password: req.body.password
+  .then(profile => {
+    if(!profile) {
+      let obj = {
+        info: req.session,
+        err: 'username salah'
       }
-    })
-    .then(profile => {
-      req.session.user = {
-        id: profile.id,
-        name: profile.name,
-        username: profile.username,
-        password: profile.password,
+      res.render('./user/login',obj)
+    } else {
+      if(profile.password != req.body.password) {
+        let obj = {
+          info: req.session,
+          err: 'password salah'
+        }
+        res.render('./user/login',obj)
+      } else {
+        models.User.changeName(profile.id)
+        .then(profile => {
+          req.session.user = {
+            id: profile.id,
+            name: profile.name,
+            username: profile.username,
+            password: profile.password,
+          }
+          req.session.status = true
+          res.redirect('/')
+        })
+        .catch(err => {
+          console.log(err)
+          res.redirect('/')      
+        })
       }
-      req.session.status = true
-      // res.send(profile)
-      res.redirect('/')
-    })
+    }
   })
   .catch(err => {
     console.log(err)
-    res.redirect('/login')
+    res.redirect('/')
   })
 })
 

@@ -11,10 +11,10 @@
       <% for(let i=0; i<comments.length; i++){ %>
         <tr>
           <% if(comments[i].ParentId==null){ %>
-            <td><%= comments[i].content %></td>
+            <td><b><%= comments[i].alias %>:</b><%= comments[i].content %></td>
           <td>
             <% for(let j=0; j<comments[i].comments.length; j++){ %>
-              <%= comments[i].comments[j].content %><br>
+              <b><%= comments[i].comments[j].alias %>:</b><%= comments[i].comments[j].content %><br>
             <% } %>
           </td>
           <td>

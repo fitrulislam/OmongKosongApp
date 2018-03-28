@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     ForumId: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER,
+    alias: DataTypes.STRING,
     content: DataTypes.STRING,
     ParentId: DataTypes.INTEGER
   }, {});

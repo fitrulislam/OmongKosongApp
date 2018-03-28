@@ -41,6 +41,7 @@ routes.post('/:id/detail',forAuth.isLogin,function(req,res){
   Comment.create({
     ForumId: req.body.forumId,
     UserId: req.session.user.id,
+    alias: req.session.user.name,
     content: req.body.comment,
     ParentId: replace,
     createdAt: new Date(),

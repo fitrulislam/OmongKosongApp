@@ -5,7 +5,6 @@
 </head>
 <body>
 	<% include ../partials/header %>
-  
 <div class="container">
 		<table class="table">
 			<thead>
@@ -16,7 +15,7 @@
 				<% for(let i=0; i<forums.length; i++){ %>
 					<tr>
 						<td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
-						<td><%= forums[i].detail %></td>
+						<td><%= forums[i].newDetail %></td>
 					</tr>
 				<% } %>
 			</tbody>

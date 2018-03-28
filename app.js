@@ -5,7 +5,7 @@ var session = require('express-session')
 const app = express()
 const PORT = 3000
 
-app.locals.helper = require('./helpers/forAuth.js')
+app.locals.helper = require('./helpers/index')
 
 app.set('view engine','ejs')
 

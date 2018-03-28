@@ -21,7 +21,7 @@
               <input class="form-control" id="password" name="password" type="password" value="<%= user.password %>">
             </div>
       </div>
-      <input type="submit" class="btn btn-primary" value="Confirm" style="margin-left: 200px" />
+      <input type="submit" class="btn btn-primary" value="Confirm" style="margin-left: 200px" onclick="return confirm('Are you sure?')">
     </form>
   </div>
   <%- include ../partials/footer.ejs %>

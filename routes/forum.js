@@ -1,6 +1,6 @@
 const routes = require('express').Router()
 const {Forum,Comment,User} = require('../models')
-const forAuth = require('../helpers/forAuth.js')
+const forAuth = require('../middleware/forAuth.js')
 
 routes.get('/',function(req,res){
   Forum.findAll({

@@ -2,7 +2,10 @@ const routes = require('express').Router()
 const models = require('../models')
 
 routes.get('/register', (req, res) => {
-  res.render('./user/register')
+  let obj = {
+    info: req.session
+  }
+  res.render('./user/register',obj)
 })
 
 routes.post('/register', (req, res) => {
@@ -83,7 +86,10 @@ routes.get('/logout', (req, res) => {
 })
 
 routes.get('/login', (req, res) => {
-  res.render('./user/login')
+  let obj = {
+    info: req.session
+  }
+  res.render('./user/login',obj)
 })
 
 routes.post('/login', (req, res) => {

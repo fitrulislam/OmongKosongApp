@@ -8,7 +8,8 @@ routes.get('/',function(req,res){
     }
   }).then(forums=>{
     let obj = {
-      forums:forums
+      forums:forums,
+      info: req.session
     }
     res.render('forum/forum.ejs',obj)
   })
@@ -25,7 +26,8 @@ routes.get('/:id/detail',function(req,res){
     }]
   }).then(forum=>{
     let obj = {
-      forum:forum
+      forum:forum,
+      info: req.session
     }
     res.render('forum/detail.ejs',obj)
   })
@@ -47,7 +49,8 @@ routes.post('/:id/detail',function(req,res){
 
 routes.get('/add',function(req,res){
   let obj = {
-    userId: req.session.user.id
+    userId: req.session.user.id,
+    info: req.session
   }
   res.render('forum/add.ejs',obj)
 })
@@ -69,19 +72,26 @@ routes.get('/:id/edit',function(req,res){
   Forum.findById(req.params.id).then(forum=>{
     let obj = {
       name: forum.name,
-      userId: forum.userId
+      userId: forum.userId,
+      info: req.session
     }
     res.render('forum/edit.ejs',obj)
   })
 })
 
 routes.post('/:id/edit',function(req,res){
-  Forum.update({
-    name: req.body.newName,
-    updatedAt: new Date()
-  }).then(()=>{
-    res.redirect(`/forum`)
-  }).catch(err=>{
+  Forum.findById(req.params.id)
+  .then(forum => {
+    forum.update({
+      name: req.body.newName,
+      updatedAt: new Date()
+    }).then(()=>{
+      res.redirect(`/forum`)
+    }).catch(err=>{
+      console.log(err.message)
+    })
+  })
+  .catch(err=>{
     console.log(err.message)
   })
 })
@@ -89,7 +99,7 @@ routes.post('/:id/edit',function(req,res){
 routes.get('/:id/delete',function(req,res){
   Forum.destroy({
     where: {
-      id: req.params.id
+      id: req.params.id,
     }
   }).then(()=>{
     res.redirect('/forum')

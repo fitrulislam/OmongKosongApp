@@ -1,14 +1,33 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
     name: DataTypes.STRING,
-    username: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        isAlpha: {
+          args: true,
+          msg: 'must Alphabetic'
+        },
+        isUsernameUnique(value, next){
+          User.findOne({
+            where: {
+              username: value
+            }
+          })
+          .then(info => {
+            if(info){
+              next('Username sudah digunakan')
+            } else {
+              next('')
+            }
+          })
+          .catch(err => {
+            next(err)
+          })
+        }
+      }
+    },
     password: DataTypes.STRING
   }, {});
   User.associate = function(models) {

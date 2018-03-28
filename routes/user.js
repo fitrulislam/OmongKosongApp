@@ -3,7 +3,8 @@ const models = require('../models')
 
 routes.get('/register', (req, res) => {
   let obj = {
-    info: req.session
+    info: req.session,
+    err: req.query.err
   }
   res.render('./user/register',obj)
 })
@@ -27,7 +28,7 @@ routes.post('/register', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.redirect('/')
+      res.redirect(`/user/register?err=${err.message}`)
     })
 })
 

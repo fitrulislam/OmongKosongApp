@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 const models = require('../models')
+const forAuth = require('../helpers/forAuth.js')
 
 routes.get('/register', (req, res) => {
   let obj = {
@@ -32,7 +33,7 @@ routes.post('/register', (req, res) => {
     })
 })
 
-routes.get('/profile', (req, res) => {
+routes.get('/profile', forAuth.isLogin, (req, res) => {
   let obj= {
     heads: ['Username', 'Password', 'Name Alias'],
     info: req.session
@@ -41,7 +42,7 @@ routes.get('/profile', (req, res) => {
   res.render('user/readProfile', obj)
 })
 
-routes.get('/:id/editProfile', (req, res) => {
+routes.get('/:id/editProfile', forAuth.isLogin, (req, res) => {
   models.User.findById(req.params.id)
   .then(data => {
     let obj = {
@@ -56,7 +57,7 @@ routes.get('/:id/editProfile', (req, res) => {
   })
 })
 
-routes.post('/:id/editProfile', (req, res) => {
+routes.post('/:id/editProfile', forAuth.isLogin, (req, res) => {
   // res.send(req.body)
   let obj = {
     username: req.body.username,
@@ -83,13 +84,13 @@ routes.post('/:id/editProfile', (req, res) => {
   })
 })
 
-routes.get('/logout', (req, res) => {
+routes.get('/logout', forAuth.isLogin, (req, res) => {
   req.session.destroy(function(err) {
     res.redirect('/')
   })
 })
 
-routes.get('/login', (req, res) => {
+routes.get('/login',(req, res) => {
   let obj = {
     info: req.session,
     err: ''
@@ -97,7 +98,7 @@ routes.get('/login', (req, res) => {
   res.render('./user/login',obj)
 })
 
-routes.post('/login', (req, res) => {
+routes.post('/login',(req, res) => {
   models.User.findOne({
     where: {
       username: req.body.username
@@ -131,7 +132,7 @@ routes.post('/login', (req, res) => {
         })
         .catch(err => {
           console.log(err)
-          res.redirect('/')      
+          res.redirect('/')
         })
       }
     }

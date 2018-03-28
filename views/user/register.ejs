@@ -9,7 +9,7 @@
 	<div class="container">
     <% if(err) { %>
     <div class="alert alert-danger">
-      <strong>Error!</strong> <%= err %>
+      <strong>Error!</strong> <%= helper.deleteValidationInfo(err) %>
     </div>
 		<% } %>
 		

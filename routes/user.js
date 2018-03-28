@@ -1,6 +1,6 @@
 const routes = require('express').Router()
 const models = require('../models')
-const forAuth = require('../helpers/forAuth.js')
+const forAuth = require('../middleware/forAuth.js')
 
 routes.get('/register', (req, res) => {
   let obj = {

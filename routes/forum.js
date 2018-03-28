@@ -92,7 +92,7 @@ routes.post('/:id/edit',forAuth.isLogin,function(req,res){
   .then(forum => {
     forum.update({
       name: req.body.newName,
-      detal: req.body.newDetail,
+      detail: req.body.newDetail,
       updatedAt: new Date()
     }).then(()=>{
       res.redirect(`/forum`)

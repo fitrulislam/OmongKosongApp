@@ -1,0 +1,22 @@
+<%- include ../partials/header.ejs %>
+  <a href="/forum/add">Add Forum</a>
+  <table>
+    <thead>
+      <th>Forum Name</th>
+      <th>Contributor</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <% for(let i=0; i<forums.length; i++){ %>
+        <tr>
+          <td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
+          <td><%= forums[i].contributor %></td>
+          <td>
+            <a href="/forum/<%= forums[i].id %>/edit">Edit</a>
+            <a href="/forum/<%= forums[i].id %>/delete">Delete</a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<%- include ../partials/footer.ejs %>

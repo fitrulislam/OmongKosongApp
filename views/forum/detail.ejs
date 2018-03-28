@@ -1,0 +1,13 @@
+<%- include ../partials/header.ejs %>
+  <h2><%= forum.name %></h2>
+  <form class="" action="" method="post">
+    <input type="hidden" name="forumId" value="<%= forum.id %>">
+    <input type="text" name="comment" value="">
+    <input type="submit" value="reply">
+  </form>
+  <table>
+    <% for(let i=0; i<forum.Comment.length; i++){ %>
+      <p><%= forum.Comment[i].content %></p>
+    <% } %>
+  </table>
+<%- include ../partials/footer.ejs %>

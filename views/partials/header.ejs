@@ -1,17 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <a href="/">Home</a>
-    <% if(info.status) { %>
-      <a href="/forum">My Forum</a>
-      <a href="/user/profile">Profile</a>
-      <a href="/user/logout">Logout</a>
+<style type="text/css">
+  .styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+</style>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Omong Kosong</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if(!info.status) { %>
+        <li><a href="/user/register">Register</a></li>
+        <li><a href="/user/login">Login</a></li>
       <% } else { %>
-        <a href="/user/register">Register</a>
-      <a href="/user/login">Login</a>
-    <% } %>
-    <p><%= info.name %></p>
+        <li><a href="/forum">My Forum</a></li>
+        <li><a href="/user/profile">Profile</a></li>
+        <li><a href="/user/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

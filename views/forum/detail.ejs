@@ -1,39 +1,53 @@
-<%- include ../partials/header.ejs %>
-  <h2><%= forum.name %></h2>
-  <p><%= forum.detail %></p>
-  <table border="1">
-    <thead>
-      <th>Comment</th>
-      <th>Child Comment</th>
-      <th>Action</th>
-    </thead>
-    <tbody>
-      <% for(let i=0; i<comments.length; i++){ %>
-        <tr>
-          <% if(comments[i].ParentId==null){ %>
-            <td><b><%= comments[i].alias %>:</b><%= comments[i].content %></td>
-          <td>
-            <% for(let j=0; j<comments[i].comments.length; j++){ %>
-              <b><%= comments[i].comments[j].alias %>:</b><%= comments[i].comments[j].content %><br>
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/header %>
+  
+	<div class="container">	
+    <h5><%= forum.name %><h5><br>
+    <p><%= forum.detail %><p><br>
+    
+    <table class="table">
+      <thead>
+        <th>Comment</th>
+        <th>Child Comment</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <% for(let i=0; i<comments.length; i++){ %>
+          <tr>
+            <% if(comments[i].ParentId==null){ %>
+              <td><b><%= comments[i].alias %>: </b><%= comments[i].content %></td>
+            <td>
+              <% for(let j=0; j<comments[i].comments.length; j++){ %>
+                <b><%= comments[i].comments[j].alias %>: </b><%= comments[i].comments[j].content %><br>
+              <% } %>
+            </td>
+            <td>
+              <form class="" action="" method="post">
+                <input type="hidden" name="parentId" value="<%= comments[i].id %>">
+                <input type="hidden" name="forumId" value="<%= forum.id %>">
+                <input type="text" name="comment" value="">
+                <input type="submit" value="reply">
+              </form>
+            </td>
             <% } %>
-          </td>
-          <td>
-            <form class="" action="" method="post">
-              <input type="hidden" name="parentId" value="<%= comments[i].id %>">
-              <input type="hidden" name="forumId" value="<%= forum.id %>">
-              <input type="text" name="comment" value="">
-              <input type="submit" value="reply">
-            </form>
-          </td>
-          <% } %>
-        </tr>
-      <% } %>
-    </tbody>
-  </table><br><br>
-  <form class="" action="" method="post">
-    <input type="hidden" name="parentId" value="">
-    <input type="hidden" name="forumId" value="<%= forum.id %>">
-    <input type="text" name="comment" value="">
-    <input type="submit" value="reply">
-  </form>
-<%- include ../partials/footer.ejs %>
+          </tr>
+        <% } %>
+      </tbody>
+      
+    </table><br><br>
+    <form class="" action="" method="post">
+      <input type="hidden" name="parentId" value="">
+      <input type="hidden" name="forumId" value="<%= forum.id %>">
+      <input type="text" name="comment" value="">
+      <input type="submit" value="reply">
+    </form>
+      
+  </div>
+  <%- include ../partials/footer.ejs %>
+</body>
+</html>

@@ -4,13 +4,13 @@ function email(email){
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'sleketepmamen@gmail.com',
-      pass: 'sleketepmamen123'
+      user: 'OmongKosongApp@gmail.com',
+      pass: 'fitrulwika'
     }
   });
 
   var mailOptions = {
-    from: 'sleketepmamen@gmail.com',
+    from: 'OmongKosongApp@gmail.com',
     to: `${email}`,
     subject: 'Your Account Has Made!',
     text: 'Thanks For Sign Up in Omong Kosong App! Happy chit-chat :D!'

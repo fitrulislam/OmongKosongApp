@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    email: DataTypes.STRING
   }, {});
   User.associate = function(models) {
     User.belongsToMany(models.Forum,{through:models.Comment})
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.hook('beforeCreate', (user, options) => {
-    let nameRandom = ['ayam','angsa','anjing','anoa','babi','bangau','bison','cicak','capung','cacing','domba','dinosaurus','entok','elang','flaminggo','gajah','harimau','ikan','itik','jaguar','kancil','kerbau','lintah','lutung','monyet','nyamuk','oranghutan','rusa','singa','ular','zebra']
+    let nameRandom = ['apel','ayam','angsa','anjing','anoa','babi','badak','bangau','bison','cicak','curut','capung','cacing','domba','dinosaurus','entog','elang','flaminggo','gajah','harimau','hiu','ikan','itik','jaguar','jerapah','kancil','kerbau','lintah','lutung','monyet','nyamuk','oranghutan','rusa','singa','ular','zebra']
     user.name = nameRandom[Math.floor(Math.random()*nameRandom.length)];
   });
 
@@ -44,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise((resolve, reject) => {
       User.findById(id)
       .then(user => {
-        let nameRandom = ['ayam','angsa','anjing','anoa','babi','bangau','bison','cicak','capung','cacing','domba','dinosaurus','entok','elang','flaminggo','gajah','harimau','ikan','itik','jaguar','kancil','kerbau','lintah','lutung','monyet','nyamuk','oranghutan','rusa','singa','ular','zebra']
+        let nameRandom = ['apel','ayam','angsa','anjing','anoa','babi','badak','bangau','bison','cicak','curut','capung','cacing','domba','dinosaurus','entog','elang','flaminggo','gajah','harimau','hiu','ikan','itik','jaguar','jerapah','kancil','kerbau','lintah','lutung','monyet','nyamuk','oranghutan','rusa','singa','ular','zebra']
         let obj = {
           username: user.username,
           password: user.password,

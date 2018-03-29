@@ -12,10 +12,11 @@ routes.get('/signup', (req, res) => {
 })
 
 routes.post('/signup', (req, res) => {
+  let input = req.body
   let obj = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email
+    username: input.username,
+    password: input.password,
+    email: input.email
   }
 
   models.User.create(obj)
@@ -26,8 +27,8 @@ routes.post('/signup', (req, res) => {
     }
     req.session.status = true
 
-    email(req.body.email)
-    
+    email(input.email,input.username,input.password)
+
     res.redirect('/')
   })
   .catch(err => {

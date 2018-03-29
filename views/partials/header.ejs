@@ -36,12 +36,12 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <% if(!info.status) { %>
-        <li><a href="/user/register">Register</a></li>
-        <li><a href="/user/login">Login</a></li>
+        <li><a href="/user/signup">Sign Up</a></li>
+        <li><a href="/user/login">Sign in</a></li>
       <% } else { %>
         <li><a href="/forum">My Forum</a></li>
         <li><a href="/user/profile">Profile</a></li>
-        <li><a href="/user/logout" onclick="return confirm('Do you want to Logout?')">Logout</a></li>
+        <li><a href="/user/logout" onclick="return confirm('Do you want to Logout?')">Sign Out</a></li>
       <% } %>
     </ul>
   </div>

@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const models = require('../models')
 const forAuth = require('../middleware/forAuth.js')
+const {email} = require('../helpers/email.js')
 
 routes.get('/register', (req, res) => {
   let obj = {
@@ -13,16 +14,19 @@ routes.get('/register', (req, res) => {
 routes.post('/register', (req, res) => {
   let obj = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   }
 
   models.User.create(obj)
     .then(profile => {
+      email(req.body.email)
       req.session.user = {
         id: profile.id,
         name: profile.name,
         username: profile.username,
         password: profile.password,
+        email: profile.email
       }
       req.session.status = true
       res.redirect('/')
@@ -35,7 +39,7 @@ routes.post('/register', (req, res) => {
 
 routes.get('/profile', forAuth.isLogin, (req, res) => {
   let obj= {
-    heads: ['Username', 'Password', 'Name Alias'],
+    heads: ['Username', 'Password', 'Email', 'Name Alias'],
     info: req.session
   }
   // res.send(req.session)
@@ -61,10 +65,12 @@ routes.post('/:id/editProfile', forAuth.isLogin, (req, res) => {
   // res.send(req.body)
   let obj = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   }
   req.session.user.username= req.body.username,
-  req.session.user.password= req.body.password
+  req.session.user.password= req.body.password,
+  req.session.user.email= req.body.email
 
   req.session.status = true
   models.User.findById(req.params.id)
@@ -126,6 +132,7 @@ routes.post('/login',(req, res) => {
             name: profile.name,
             username: profile.username,
             password: profile.password,
+            email: profile.email
           }
           req.session.status = true
           res.redirect('/')

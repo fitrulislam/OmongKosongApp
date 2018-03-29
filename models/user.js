@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    email: DataTypes.STRING
   }, {});
   User.associate = function(models) {
     User.belongsToMany(models.Forum,{through:models.Comment})

@@ -5,14 +5,20 @@
 </head>
 <body>
 	<% include ../partials/header %>
-  
-	<div class="container">	
+
+	<div class="container">
     <h3>Edit Profile</h3><br>
 		<form class="form-horizontal" method="post">
       <div class="form-group">
         <label class="col-sm-2 control-label">Username</label>
             <div class="col-sm-5">
               <input class="form-control" id="username" name="username" type="text" value="<%= user.username %>">
+            </div>
+      </div>
+			<div class="form-group">
+        <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="email" name="email" type="text" value="<%= user.email %>">
             </div>
       </div>
       <div class="form-group">

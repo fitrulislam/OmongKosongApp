@@ -19,39 +19,43 @@ routes.post('/signup', (req, res) => {
   }
 
   models.User.create(obj)
-    .then(profile => {
-      email(req.body.email)
-      req.session.user = {
-        id: profile.id,
-        name: profile.name,
-        username: profile.username,
-        password: profile.password,
-        email: profile.email
-      }
-      req.session.status = true
-      res.redirect('/')
-    })
-    .catch(err => {
-      console.log(err)
-      res.redirect(`/user/signup?err=${err.message}`)
-    })
+  .then(profile => {
+    req.session.user = {
+      id: profile.id,
+      name: profile.name,
+    }
+    req.session.status = true
+    res.redirect('/')
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect(`/user/signup?err=${err.message}`)
+  })
 })
 
 routes.get('/profile', forAuth.isLogin, (req, res) => {
-  let obj= {
-    heads: ['Username', 'Password', 'Email', 'Name Alias'],
-    info: req.session
-  }
-  // res.send(req.session)
-  res.render('user/readProfile', obj)
+  models.User.findById(req.session.user.id)
+  .then(profile => {
+    let obj= {
+      heads: ['Username', 'Password', 'Name Alias'],
+      info: req.session,
+      profile: profile
+    }
+    // res.send(obj)
+    res.render('user/readProfile', obj)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
 })
 
 routes.get('/:id/editProfile', forAuth.isLogin, (req, res) => {
   models.User.findById(req.params.id)
-  .then(data => {
+  .then(profile => {
     let obj = {
-      user: data,
-      info: req.session
+      profile: profile,
+      info: req.session,
     }
     res.render('user/editProfile', obj)
   })
@@ -68,15 +72,11 @@ routes.post('/:id/editProfile', forAuth.isLogin, (req, res) => {
     password: req.body.password,
     email: req.body.email
   }
-  req.session.user.username= req.body.username,
-  req.session.user.password= req.body.password,
-  req.session.user.email= req.body.email
 
-  req.session.status = true
   models.User.findById(req.params.id)
   .then(data => {
     data.update(obj)
-    then(info => {
+    .then(info => {
       res.redirect('/')
     })
     .catch(err => {
@@ -104,7 +104,7 @@ routes.get('/login',(req, res) => {
   res.render('./user/login',obj)
 })
 
-routes.post('/login',(req, res) => {
+routes.post('/login', forAuth.encrypt, (req, res) => {
   models.User.findOne({
     where: {
       username: req.body.username
@@ -130,9 +130,6 @@ routes.post('/login',(req, res) => {
           req.session.user = {
             id: profile.id,
             name: profile.name,
-            username: profile.username,
-            password: profile.password,
-            email: profile.email
           }
           req.session.status = true
           res.redirect('/')

@@ -11,7 +11,7 @@
 		<table class="table">
         <tr>
           <th>Username</th>
-          <td><%= info.user.username %></td>
+          <td><%= profile.username %></td>
         </tr>
 				<tr>
           <th>Email</th>
@@ -19,11 +19,11 @@
         </tr>
         <tr>
           <th>Password</th>
-          <td><%= info.user.password %></td>
+          <td><%= helper.decryptPassword(profile.password) %></td>
         </tr>
         <tr>
           <th>Name Alias</th>
-          <td><%= info.user.name %></td>
+          <td><%= profile.name %></td>
         </tr>
       </table>
       <a href="/user/<%=info.user.id%>/editProfile">

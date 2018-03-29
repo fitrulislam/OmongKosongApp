@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const models = require('../models')
 const forAuth = require('../middleware/forAuth.js')
+const {email} = require('../helpers/email.js')
 
 routes.get('/signup', (req, res) => {
   let obj = {
@@ -13,7 +14,8 @@ routes.get('/signup', (req, res) => {
 routes.post('/signup', (req, res) => {
   let obj = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   }
 
   models.User.create(obj)
@@ -67,7 +69,8 @@ routes.post('/:id/editProfile', forAuth.isLogin, (req, res) => {
   // res.send(req.body)
   let obj = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   }
 
   models.User.findById(req.params.id)

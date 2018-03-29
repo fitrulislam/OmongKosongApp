@@ -5,13 +5,17 @@
 </head>
 <body>
 	<% include ../partials/header %>
-  
-	<div class="container">	
+
+	<div class="container">
     <h3>Your Profile</h3><br>
 		<table class="table">
         <tr>
           <th>Username</th>
           <td><%= profile.username %></td>
+        </tr>
+				<tr>
+          <th>Email</th>
+          <td><%= info.user.email %></td>
         </tr>
         <tr>
           <th>Password</th>

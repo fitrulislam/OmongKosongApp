@@ -19,11 +19,18 @@ module.exports = (sequelize, DataTypes) => {
       Comment.findAll({
         where: {
           ForumId: id
-        }
+        },
+        include: [{
+          model:sequelize.models.User
+        }]
       }).then(comments=>{
         let promCC = comments.map(comment=>{
           return new Promise(function(resolve, reject) {
-            comment.getComments().then(innerComment=>{
+            comment.getComments({
+              include: [{
+                model:sequelize.models.User
+              }]
+            }).then(innerComment=>{
               comment.comments = innerComment
               resolve(comment)
             })

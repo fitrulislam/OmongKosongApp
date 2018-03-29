@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const {Forum,Comment,User} = require('../models')
 const forAuth = require('../middleware/forAuth.js')
+const {comment,respond} = require('../helpers/email.js')
 
 routes.get('/', forAuth.isLogin, function(req,res){
   Forum.findAll({
@@ -28,26 +29,38 @@ routes.get('/:id/detail',function(req,res){
     }
   }).then(forum=>{
     Comment.getChild(req.params.id).then(comments=>{
-      let obj = {
-        forum: forum,
-        comments: comments,
-        info: req.session
-      }
-      res.render('forum/detail.ejs',obj)
+      User.findOne({
+        where: {
+          id: forum.userId
+        }
+      }).then(user=>{
+        let obj = {
+          forum: forum,
+          comments: comments,
+          user: user,
+          info: req.session
+        }
+        res.render('forum/detail.ejs',obj)
+      })
     })
   })
 })
 
 routes.post('/:id/detail',forAuth.isLogin,function(req,res){
-  let replace = req.body.parentId
-  if(req.body.parentId==''){
+  let input = req.body
+  let replace
+  if(input.parentId==''){
     replace = null
+    comment(input.email,req.session.user.name,input.forumName)
+  } else {
+    replace = input.parentId
+    respond(input.email,req.session.user.name,input.forumName)
   }
   Comment.create({
-    ForumId: req.body.forumId,
+    ForumId: input.forumId,
     UserId: req.session.user.id,
     alias: req.session.user.name,
-    content: req.body.comment,
+    content: input.comment,
     ParentId: replace,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -67,10 +80,11 @@ routes.get('/add',forAuth.isLogin,function(req,res){
 })
 
 routes.post('/add',forAuth.isLogin,function(req,res){
+  let input = req.body
   Forum.create({
-    name: req.body.newName,
-    userId: req.body.id,
-    detail: req.body.newDetail,
+    name: input.newName,
+    userId: input.id,
+    detail: input.newDetail,
     createdAt: new Date(),
     updatedAt: new Date()
   }).then(()=>{
@@ -93,11 +107,12 @@ routes.get('/:id/edit',forAuth.isLogin,function(req,res){
 })
 
 routes.post('/:id/edit',forAuth.isLogin,function(req,res){
+  let input = req.body
   Forum.findById(req.params.id)
   .then(forum => {
     forum.update({
-      name: req.body.newName,
-      detail: req.body.newDetail,
+      name: input.newName,
+      detail: input.newDetail,
       updatedAt: new Date()
     }).then(()=>{
       res.redirect(`/forum`)

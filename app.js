@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 
 const app = express()
-const PORT = 3000
+const port = process.env.PORT || 4000
 
 app.locals.helper = require('./helpers/index')
 
@@ -19,6 +19,6 @@ app.use(session({
 
 app.use('/',require('./routes'))
 
-app.listen(PORT,()=>{
-  console.log(`OmongKosong running in ${PORT}`)
+app.listen(port,()=>{
+  console.log(`OmongKosong running in ${port}`)
 })

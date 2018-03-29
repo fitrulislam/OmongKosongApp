@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "fitrul31",
-    "password": "fitrul31",
+    "username": "postgres",
+    "password": null,
     "database": "OmongKosongApp",
     "host": "127.0.0.1",
     "dialect": "postgres"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "qiannxtztvyjvm",
+    "password": "99b1d9f5e1715780201bc8a252a14fe53ac05f9bada801ab9e0f43a63f7ebc06",
+    "database": "d41vlbgbehgpgh",
+    "host": "ec2-54-243-28-109.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }

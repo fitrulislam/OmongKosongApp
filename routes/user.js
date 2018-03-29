@@ -25,6 +25,9 @@ routes.post('/signup', (req, res) => {
       name: profile.name,
     }
     req.session.status = true
+
+    email(req.body.email)
+    
     res.redirect('/')
   })
   .catch(err => {
@@ -37,7 +40,7 @@ routes.get('/profile', forAuth.isLogin, (req, res) => {
   models.User.findById(req.session.user.id)
   .then(profile => {
     let obj= {
-      heads: ['Username', 'Password', 'Name Alias'],
+      heads: ['Username', 'Password', 'Email', 'Name Alias'],
       info: req.session,
       profile: profile
     }

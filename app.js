@@ -14,7 +14,7 @@ app.use(session({
   secret: 'omong kosong',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 600000 }
 }))
 
 app.use('/',require('./routes'))

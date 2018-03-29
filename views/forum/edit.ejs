@@ -1,9 +1,32 @@
-<%- include ../partials/header.ejs %>
-  <form class="" action="" method="post">
-    <input type="hidden" name="userId" value="<%= userId %>">
-    <label>Forum Name</label><br>
-    <input type="text" name="newName" value="<%= name %>"><br>
-    <br>
-    <input type="submit">
-  </form>
-<%- include ../partials/footer.ejs %>
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/header %>
+
+	<div class="container">
+		
+		<h3>Edit Forum</h3>
+		<form class="form-horizontal" method="post">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <input type="hidden" name="id" value="<%= userId %>">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Forum Name</label>
+	      		<div class="col-sm-5">
+	        		<input class="form-control" id="username" name="newName" type="text" value="<%= name %>">
+	      		</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Forum Detail</label>
+	      		<div class="col-sm-5">
+	        		<input class="form-control" id="password" name="newDetail" type="text" value="<%= detail %>">
+	      		</div>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Submit" style="margin-left: 200px" />
+		</form>
+  </div>
+  <%- include ../partials/footer.ejs %>
+</body>
+</html>

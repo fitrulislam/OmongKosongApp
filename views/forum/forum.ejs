@@ -1,22 +1,38 @@
-<%- include ../partials/header.ejs %>
-  <a href="/forum/add">Add Forum</a>
-  <table>
-    <thead>
-      <th>Forum Name</th>
-      <th>Contributor</th>
-      <th>Action</th>
-    </thead>
-    <tbody>
-      <% for(let i=0; i<forums.length; i++){ %>
-        <tr>
-          <td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
-          <td><%= forums[i].contributor %></td>
-          <td>
-            <a href="/forum/<%= forums[i].id %>/edit">Edit</a>
-            <a href="/forum/<%= forums[i].id %>/delete">Delete</a>
-          </td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
-<%- include ../partials/footer.ejs %>
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/header %>
+  
+	<div class="container">	
+    <h3>My Forum</h3><br>
+    <a href="/forum/add">
+      <h4 text-align= "center">Add Forum</h4>
+    </a>
+  
+    <table class="table">
+      <thead>
+        <th>Forum Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <% for(let i=0; i<forums.length; i++){ %>
+          <tr>
+            <td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
+            <td><%= forums[i].detail %></td>
+            <td>
+              <a href="/forum/<%= forums[i].id %>/edit">Edit</a>
+              <a href="/forum/<%= forums[i].id %>/delete">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+      
+  </div>
+  <%- include ../partials/footer.ejs %>
+</body>
+</html>

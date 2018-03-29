@@ -1,17 +1,27 @@
-<%- include ../partials/header.ejs %>
-  <table>
-    <thead>
-      <th>Forum Name</th>
-      <th>Contributor</th>
-    </thead>
-    <tbody>
-      <% for(let i=0; i<forums.length; i++){ %>
-        <tr>
-          <td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
-          <td><%= forums[i].contributor %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  </table>
+<!DOCTYPE html>
+<html>
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+	<% include ../partials/header %>
+<div class="container">
+		<table class="table">
+			<thead>
+				<th>Forum Name</th>
+				<th>Description</th>
+			</thead>
+			<tbody>
+				<% for(let i=0; i<forums.length; i++){ %>
+					<tr>
+						<td><a href="/forum/<%= forums[i].id %>/detail"><%= forums[i].name %></a></td>
+						<td><%= forums[i].newDetail %></td>
+					</tr>
+				<% } %>
+			</tbody>
+		</table>
+</div>
 
-<%- include ../partials/footer.ejs %>
+<%- include ../partials/footer %>
+</body>
+</html>

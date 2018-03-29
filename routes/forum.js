@@ -2,17 +2,22 @@ const routes = require('express').Router()
 const {Forum,Comment,User} = require('../models')
 const forAuth = require('../middleware/forAuth.js')
 
-routes.get('/',function(req,res){
+routes.get('/', forAuth.isLogin, function(req,res){
   Forum.findAll({
     where: {
       userId: req.session.user.id
     }
-  }).then(forums=>{
+  })
+  .then(forums=>{
     let obj = {
       forums:forums,
       info: req.session
     }
     res.render('forum/forum.ejs',obj)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
   })
 })
 

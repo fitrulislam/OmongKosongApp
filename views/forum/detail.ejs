@@ -13,7 +13,7 @@
     <table class="table">
       <thead>
         <th>Comment</th>
-        <th>Child Comment</th>
+        <th>Respond</th>
         <th>Action</th>
       </thead>
       <tbody>
@@ -31,7 +31,7 @@
                 <input type="hidden" name="parentId" value="<%= comments[i].id %>">
                 <input type="hidden" name="forumId" value="<%= forum.id %>">
                 <input type="text" name="comment" value="">
-                <input type="submit" value="reply">
+                <input type="submit" value="respond">
               </form>
             </td>
             <% } %>
@@ -44,7 +44,7 @@
       <input type="hidden" name="parentId" value="">
       <input type="hidden" name="forumId" value="<%= forum.id %>">
       <input type="text" name="comment" value="">
-      <input type="submit" value="reply">
+      <input type="submit" value="comment">
     </form>
       
   </div>

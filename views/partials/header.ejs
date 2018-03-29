@@ -27,21 +27,30 @@
    height: 34px;
    width: 268px;
 }
+
+#font {
+  font-size: 20px
+}
+
+#pd {
+  padding: 10px 50px
+}
+
 </style>
 
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container-fluid" id="pd">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Omong Kosong</a>
+      <a class="navbar-brand" href="/" id="font">Omong Kosong</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <% if(!info.status) { %>
-        <li><a href="/user/signup">Sign Up</a></li>
-        <li><a href="/user/login">Sign in</a></li>
+        <li><a href="/user/signup" id="font">Sign Up</a></li>
+        <li><a href="/user/login" id="font">Sign in</a></li>
       <% } else { %>
-        <li><a href="/forum">My Forum</a></li>
-        <li><a href="/user/profile">Profile</a></li>
-        <li><a href="/user/logout" onclick="return confirm('Do you want to Sign Out?')">Sign Out</a></li>
+        <li><a href="/forum" id="font">My Forum</a></li>
+        <li><a href="/user/profile" id="font">Profile</a></li>
+        <li><a href="/user/logout" onclick="return confirm('Do you want to Sign Out?')" id="font">Sign Out</a></li>
       <% } %>
     </ul>
   </div>

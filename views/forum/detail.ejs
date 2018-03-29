@@ -33,22 +33,24 @@
                 <input type="hidden" name="forumId" value="<%= forum.id %>">
 								<input type="hidden" name="forumName" value="<%= forum.name %>">
                 <input type="text" name="comment" value="">
-                <input type="submit" value="respond">
+                <button type="submit" class="btn btn-primary btn-sm">respond</button>
+                <!-- <input type="submit" value="respond"> -->
               </form>
             </td>
             <% } %>
           </tr>
         <% } %>
       </tbody>
-
     </table><br><br>
-    <form class="" action="" method="post">
+
+    <form class="container" action="" method="post">
 			<input type="hidden" name="email" value="<%= user.email %>">
       <input type="hidden" name="parentId" value="">
       <input type="hidden" name="forumId" value="<%= forum.id %>">
 			<input type="hidden" name="forumName" value="<%= forum.name %>">
       <input type="text" name="comment" value="">
-      <input type="submit" value="comment">
+      <button type="submit" class="btn btn-primary btn-sm">comment</button>
+      <!-- <input type="submit" value="comment"> -->
     </form>
 
   </div>

@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Forum.prototype.getDetail = function(){
-    if(this.detail.length>=30){
+    if(this.detail.length>=45){
       let newDetail = ''
-      for(let i=0; i<30; i++){
+      for(let i=0; i<45; i++){
         newDetail += this.detail[i]
       }
       newDetail += '.....'

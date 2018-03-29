@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-var session = require('express-session')
+const session = require('express-session')
 
 const app = express()
 const PORT = 3000
@@ -14,7 +14,7 @@ app.use(session({
   secret: 'omong kosong',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 600000 }
 }))
 
 app.use('/',require('./routes'))

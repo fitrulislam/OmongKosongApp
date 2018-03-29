@@ -5,15 +5,15 @@
 </head>
 <body>
 	<% include ../partials/header %>
-  
-	<div class="container">	
+
+	<div class="container">
     <h5><h2><%= forum.name %></h2><h5><br>
     <p><%= forum.detail %><p><br>
-    
+
     <table class="table">
       <thead>
         <th>Comment</th>
-        <th>Child Comment</th>
+        <th>Respond</th>
         <th>Action</th>
       </thead>
       <tbody>
@@ -28,25 +28,29 @@
             </td>
             <td>
               <form class="" action="" method="post">
+								<input type="hidden" name="email" value="<%= comments[i].User.email %>">
                 <input type="hidden" name="parentId" value="<%= comments[i].id %>">
                 <input type="hidden" name="forumId" value="<%= forum.id %>">
+								<input type="hidden" name="forumName" value="<%= forum.name %>">
                 <input type="text" name="comment" value="">
-                <input type="submit" value="reply">
+                <input type="submit" value="respond">
               </form>
             </td>
             <% } %>
           </tr>
         <% } %>
       </tbody>
-      
+
     </table><br><br>
     <form class="" action="" method="post">
+			<input type="hidden" name="email" value="<%= user.email %>">
       <input type="hidden" name="parentId" value="">
       <input type="hidden" name="forumId" value="<%= forum.id %>">
+			<input type="hidden" name="forumName" value="<%= forum.name %>">
       <input type="text" name="comment" value="">
-      <input type="submit" value="reply">
+      <input type="submit" value="comment">
     </form>
-      
+
   </div>
   <%- include ../partials/footer.ejs %>
 </body>

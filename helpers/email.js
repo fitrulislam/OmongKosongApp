@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-function email(email){
+function email(email,username,password){
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -13,7 +13,7 @@ function email(email){
     from: 'OmongKosongApp@gmail.com',
     to: `${email}`,
     subject: 'Your Account Has Made!',
-    text: 'Thanks For Sign Up in Omong Kosong App! Happy chit-chat :D!'
+    text: `Thanks For Sign Up in Omong Kosong App!\n\nYour username: ${username}\nYour password: ${password}\n\nHappy chit-chat :D!`
   };
 
   transporter.sendMail(mailOptions, function(error, info){
